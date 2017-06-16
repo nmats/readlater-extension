@@ -7,19 +7,24 @@ DB_PWD,
 COLLECTION_NAME,
 COLLECTION_SCHEMA } from '../constants';
 
-RxDB.plugin( require('pouchdb-adapter-websql') );
+RxDB.plugin( require('pouchdb-adapter-idb') );
 
-const RxDB = {};
+const DB = {};
+
+let db = null;
+let collection = null;
 
 const createDB = async () => {
-  const db = await RxDB.create({
+  const _db = await RxDB.create({
     name: DB_NAME,
     password: DB_PWD,
-    adapter: 'websql',
+    adapter: 'idb',
     multiInstance: true
   });
 
-  return db;
+  const collection = createCollection( _db );
+
+  return _db;
 }
 
 const createCollection = async db => {
@@ -31,10 +36,10 @@ const createCollection = async db => {
   return collection;
 }
 
-RxDB.init = () => {
-  return createDB();
+DB.init = () => {
+  if ( !!db )
+    db = createDB();
+  return db;
 }
 
-RxDB.collection = () => {
-  return createCollection();
-}
+export default DB;

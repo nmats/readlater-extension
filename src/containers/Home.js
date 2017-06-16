@@ -5,6 +5,7 @@ import SearchForm from './SearchForm';
 import ShopResults from './ShopResults';
 
 import { sendRequest } from '../modules/helper';
+import DB from '../modules/Database';
 
 import Style from '../styles/Style.css';
 import '../assets/css/reset.css';
@@ -15,7 +16,8 @@ export default class Home extends Component {
     super(props);
     this.state = {
       shops: null,
-      searchObj: {}
+      searchObj: {},
+      database: null
     }
   }
 
@@ -40,6 +42,10 @@ export default class Home extends Component {
         searchObj: searchObj
       }));
     });
+  }
+
+  componentDidMount() {
+    this.state.database = DB.init();
   }
 
   render() {
