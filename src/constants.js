@@ -89,7 +89,7 @@ export const API_OPTIONS = {
 }
 
 export const DB_NAME = 'bookmarks';
-export const DB_PWD = 'barnaviDB'
+export const DB_PWD = 'readLater'
 export const COLLECTION_NAME = 'userbookmark';
 export const COLLECTION_SCHEMA = {
   'disableKeyCompression': true,
@@ -99,22 +99,17 @@ export const COLLECTION_SCHEMA = {
   'type': 'object',
   'properties': {
     'id': {
-      'type': 'number',
+      'type': 'string',
       'primary': true
     },
-    'shop_name': {
-      'type': 'string',
-      'encrypted': true
-    },
-    'last_login': {
-      'type': 'number'
-    },
-    'status': { 
+    'page_title': {
       'type': 'string'
     },
-    'user_locale': {
+    'page_url': {
+      'type': 'string'
+    },
+    'page_desc': {
       'type': 'string'
     }
-  },
-  'required': [ 'user_pwd', 'last_login', 'status' ]
+  }
 };

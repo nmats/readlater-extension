@@ -9,7 +9,18 @@ import baseConfig from './webpack.config.base.js';
 
 export default merge.smart( baseConfig, {
 
-  entry: path.join( __dirname, 'src/index.js' ),
+  entry: {
+    main: [
+      'babel-polyfill',
+      path.join( __dirname, 'src/index.js' )
+    ],
+    content: [
+      path.join( __dirname, 'src/content-script.js' )
+    ],
+    background: [
+      path.join( __dirname, 'src/background.js' )
+    ]
+  },
 
   output: {
     path: path.join( __dirname, 'app/chrome' ),

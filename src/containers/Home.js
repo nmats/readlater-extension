@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import SearchForm from './SearchForm';
-import ShopResults from './ShopResults';
+import PageInformation from './PageInformation';
+import Lists from './Lists';
 
-import { sendRequest } from '../modules/helper';
 import DB from '../modules/Database';
-
 import Style from '../styles/Style.css';
 import '../assets/css/reset.css';
 
@@ -21,46 +19,31 @@ export default class Home extends Component {
     }
   }
 
-  onsubmit( event ) {
-    event.preventDefault();
-
-    const formData = {};
-    const elements = event.target.querySelectorAll('input, select');
-    [...elements].forEach( elem => {
-      const name = elem.getAttribute('name');
-      const value = !!elem.value ? elem.value : null;
-
-      if ( !!value && name !== 'submit' && value !== '99' ) {
-        formData[ name ] = value;
-      }
-
-    });
-
-    sendRequest( formData, ( shops, searchObj ) => {
-      this.setState( prev => ({
-        shops: shops,
-        searchObj: searchObj
+  componentDidMount() {
+    const db = new DB();
+    db.init().then( () => {
+      this.setState(() => ({
+        database: db
       }));
     });
-  }
-
-  componentDidMount() {
-    this.state.database = DB.init();
   }
 
   render() {
     return(
       <section 
-        className={ classNames(Style.searchForm) }>
-        <SearchForm onsubmit={ this.onsubmit.bind(this) } />
-        {
-          !!this.state.shops 
-          ? <ShopResults 
-              list={ this.state.shops }
-              searchObj={ this.state.searchObj } /> 
-          : null
-        }
+          className={ classNames(Style.searchForm) }>
+          {
+            !!this.state.database
+            ? <PageInformation db={ this.state.database } />
+            : null
+          }
+          {
+            !!this.state.database
+            ? <Lists db={ this.state.database } />
+            : null
+          }
       </section>
     )
   }
+
 }
