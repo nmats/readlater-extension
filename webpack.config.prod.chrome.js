@@ -16,9 +16,6 @@ export default merge.smart( baseConfig, {
     ],
     content: [
       path.join( __dirname, 'src/content-script.js' )
-    ],
-    background: [
-      path.join( __dirname, 'src/background.js' )
     ]
   },
 

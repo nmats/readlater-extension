@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
+// =======================
+// Import view components.
+// =======================
 import ListItem from '../components/ListItem';
+
+// =======================
+// Import modules.
+// =======================
+import Styles from '../styles/Style.css';
 
 export default class Lists extends Component {
 
@@ -11,31 +19,61 @@ export default class Lists extends Component {
     }
   }
 
-  async getDocuments() {
-    await this.props.db.findDocuments().then( docs => {
-      this.setState(() => ({
-        lists: docs
-      }));
+  getDocuments() {
+    this.props.db.getAllData()
+      .then( items => {
+        this.setState( () => ({
+          lists: Object.values( items )
+        }));
+      })
+      .catch( err => console.log( err ) );
+  }
+
+  removeAllData() {
+    this.props.db.removeAllData()
+      .then( success => console.log( success.message ) )
+      .catch( err => console.log( err.message ) );
+  }
+
+  linkClick( event ) {
+    event.preventDefault();
+
+    const link = event.currentTarget.href;
+    chrome.tabs.create({
+      url: link,
+      active: true
     });
   }
 
-  async connectDatabase() {
-    return await this.props.db.observeCollection();
+  buttonClick( event ) {
+    event.preventDefault();
+
+    const key = event.currentTarget.getAttribute('data-key');
+    this.props.db.removeData( key )
+      .then( success => {
+        this.setState( prev => ({
+          lists: prev.lists.filter( list => list.key != key )
+        }));
+      }) 
+      .catch( err => console.log( err.message ) );
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getDocuments();
-    this.connectDatabase();
   }
 
   render() {
     return(
       <section>
         <h2>List</h2>
-        <ul>
+        <ul className={ Styles.items }>
           {
             this.state.lists.map( list => {
-              return <ListItem pageData={ list } key={ list.id } />
+              return <ListItem 
+                pageData={ list } 
+                key={ list.key } 
+                linkClick={ this.linkClick.bind(this) }
+                btnClick={ this.buttonClick.bind(this) } />
             })
           }
         </ul>

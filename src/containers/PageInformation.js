@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 
+// =======================
+// Import view components.
+// =======================
 import Info from '../components/PageInfo';
 import SaveBtn from '../components/SaveBtn';
 
+// =======================
+// Import modules.
+// =======================
 import Styles from '../styles/Style.css';
 
 export default class PageInformation extends Component {
@@ -12,36 +18,39 @@ export default class PageInformation extends Component {
     this.state = {
       title: '',
       url: '',
-      description: ''
+      description: '',
+      favicon: ''
     };
   }
 
-  async clickSave() {
-    const result = await this.props.db.addDocument(
-      this.state.title,
-      this.state.url,
-      this.state.description
-    );
+  clickSave() {
+    this.props.db.setData({
+      title: this.state.title,
+      url: this.state.url,
+      desc: this.state.description,
+      favicon: this.state.favicon
+    }).
+    then( result => {
+      window.close();
+    })
+    .catch( err => {
+      console.log( err );
+    });
   }
 
   componentDidMount() {
     chrome.tabs.query({active: true, currentWindow: true}, tabs => {
       chrome.tabs.sendMessage( tabs[0].id, { type: 'from-popup' }, res => {
-        console.log( res );
         if ( res.type === 'from-content' ) {
           this.setState(() => ({
             title: res.title,
             url: res.url,
-            description: res.description
+            description: res.description,
+            favicon: res.favicon
           }));
         }  
       });
     });
-
-    /*this.setState( () => ({
-      title: document.querySelector('title').textContent.trim(),
-      url: document.location.href
-    }));*/
   }
 
   render() {

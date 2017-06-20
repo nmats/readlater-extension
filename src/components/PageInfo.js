@@ -4,9 +4,6 @@ import Styles from '../styles/Style.css';
 export default ({ title }) => {
   return(
     <div>
-      <h2 className={ Styles.pageinfo_title }>
-        { 'Do you add this page to your Read Later?' }
-      </h2>
       <div className={ Styles.pageinfoBody }>
         <h3 
           className={ Styles.pageinfo_label }>{ 'Current Page Title' }</h3>

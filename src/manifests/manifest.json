@@ -1,26 +1,27 @@
 {
   "manifest_version": 2,
 
-  "name": "Bar検索",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
+  "name": "あとで読む",
+  "description": "Just store the page link what you want to read later.",
+  "version": "1.0.0",
   "icons": {
-    "16": "beer.png"
+    "16": "link_16.png",
+    "48": "link_48.png",
+    "128": "link_128.png"
   },
   "browser_action": {
-    "default_name": "test extension",
-    "default_icon": "beer.png",
+    "default_title": "あとで読むリスト",
+    "default_icon": "link_16.png",
     "default_popup": "index.html"
   },
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "storage"
   ],
   "content_scripts": [
     {
       "matches" : ["*://*/*"],
-      "js": ["content.js"],
-      "run_at": "document_end"
+      "js": ["content.js"]
     }
   ]
 }
