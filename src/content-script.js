@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener( (req, sender, sendRes) => {
   }
 });
 
-chrome.runtime.onMessage.addListener( (req, sender, sendRes) => {
+chrome.runtime.onMessage.addListener( req => {
   if ( req.type === 'open-link' ) {
     chrome.tabs.create({
       url: req.url,

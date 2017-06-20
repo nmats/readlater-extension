@@ -29,12 +29,12 @@ export default class PageInformation extends Component {
       url: this.state.url,
       desc: this.state.description,
       favicon: this.state.favicon
-    }).
-    then( result => {
+    })
+    .then( () => {
       window.close();
     })
     .catch( err => {
-      console.log( err );
+      console.error( err );
     });
   }
 

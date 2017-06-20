@@ -4,7 +4,7 @@ export default class Database {
     this.items = {};
   }
 
-  setData(data) {
+  setData( data ) {
     return new Promise( (resolve, reject) => {
       const newData = {};
       const now = Date.now();

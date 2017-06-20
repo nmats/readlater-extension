@@ -16,8 +16,8 @@ import '../assets/css/reset.css';
 
 export default class Home extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.state = {
       shops: null,
       searchObj: {},
@@ -28,9 +28,9 @@ export default class Home extends Component {
   render() {
     return(
       <section 
-          className={ classNames(Style.searchForm) }>
-          <PageInformation db={ this.state.database } />
-          <Lists db={ this.state.database } />
+        className={ classNames( Style.searchForm ) }>
+        <PageInformation db={ this.state.database } />
+        <Lists db={ this.state.database } />
       </section>
     )
   }

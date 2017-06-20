@@ -12,8 +12,8 @@ import Styles from '../styles/Style.css';
 
 export default class Lists extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.state = {
       lists: []
     }
@@ -21,18 +21,18 @@ export default class Lists extends Component {
 
   getDocuments() {
     this.props.db.getAllData()
-      .then( items => {
-        this.setState( () => ({
-          lists: Object.values( items )
-        }));
-      })
-      .catch( err => console.log( err ) );
+    .then( items => {
+      this.setState( () => ({
+        lists: Object.values( items )
+      }));
+    })
+    .catch( err => console.error( err ) );
   }
 
   removeAllData() {
     this.props.db.removeAllData()
-      .then( success => console.log( success.message ) )
-      .catch( err => console.log( err.message ) );
+    .then( () => null )
+    .catch( err => console.error( err.message ) );
   }
 
   linkClick( event ) {
@@ -48,14 +48,14 @@ export default class Lists extends Component {
   buttonClick( event ) {
     event.preventDefault();
 
-    const key = event.currentTarget.getAttribute('data-key');
+    const key = event.currentTarget.getAttribute( 'data-key' );
     this.props.db.removeData( key )
-      .then( success => {
-        this.setState( prev => ({
-          lists: prev.lists.filter( list => list.key != key )
-        }));
-      }) 
-      .catch( err => console.log( err.message ) );
+    .then( () => {
+      this.setState( prev => ({
+        lists: prev.lists.filter( list => list.key != key )
+      }));
+    }) 
+    .catch( err => console.error( err.message ) );
   }
 
   componentDidMount() {
@@ -72,8 +72,8 @@ export default class Lists extends Component {
               return <ListItem 
                 pageData={ list } 
                 key={ list.key } 
-                linkClick={ this.linkClick.bind(this) }
-                btnClick={ this.buttonClick.bind(this) } />
+                linkClick={ this.linkClick.bind( this ) }
+                btnClick={ this.buttonClick.bind( this ) } />
             })
           }
         </ul>
