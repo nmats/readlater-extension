@@ -15,7 +15,8 @@ export default class Lists extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      lists: []
+      lists: [],
+      listName: chrome.i18n.getMessage( 'list_name' )
     }
   }
 
@@ -65,7 +66,7 @@ export default class Lists extends Component {
   render() {
     return(
       <section>
-        <h2>List</h2>
+        <h2>{ this.state.listName }</h2>
         <ul className={ Styles.items }>
           {
             this.state.lists.map( list => {

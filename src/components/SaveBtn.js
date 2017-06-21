@@ -1,13 +1,13 @@
 import React from 'react';
 import Styles from '../styles/Style.css';
 
-export default ({ action }) => {
+export default ({ action, btnLabel }) => {
   return(
     <div className={ Styles.saveBtnWrapper }>
       <button
         onClick={ action }
         className={ Styles.saveBtn }>
-        { 'Add to list' }
+        { btnLabel }
       </button>
     </div>
   )

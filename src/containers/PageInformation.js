@@ -19,7 +19,9 @@ export default class PageInformation extends Component {
       title: '',
       url: '',
       description: '',
-      favicon: ''
+      favicon: '',
+      label: chrome.i18n.getMessage( 'current_page' ),
+      btnLabel: chrome.i18n.getMessage( 'btn_label' )
     };
   }
 
@@ -56,8 +58,8 @@ export default class PageInformation extends Component {
   render() {
     return(
       <section className={ Styles.pageinfoWrapper }>
-        <Info title={ this.state.title } />
-        <SaveBtn action={ this.clickSave.bind(this) } />
+        <Info title={ this.state.title } label={ this.state.label } />
+        <SaveBtn action={ this.clickSave.bind(this) } btnLabel={ this.state.btnLabel } />
       </section>
     )
   }

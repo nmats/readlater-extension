@@ -1,0 +1,17 @@
+{
+  "extension_name": {
+    "message": "あとで読む"
+  },
+  "extension_desc": {
+    "message": "ブックマークに入れる前に、今いるページをあとで読むためにリンクを保存するエクステンションです。"
+  },
+  "current_page": {
+    "message": "ページタイトル"
+  },
+  "list_name": {
+    "message": "リスト"
+  },
+  "btn_label": {
+    "message": "追加"
+  }
+}

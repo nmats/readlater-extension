@@ -56,7 +56,20 @@ export default merge.smart( baseConfig, {
     }),
 
     new CopyWebpackPlugin([
-      { from: './src/**/*.{html,json}', to: './', flatten: true },
+      { 
+        from: './src/**/*.html', 
+        to: './', 
+        flatten: true 
+      },
+      {
+        from: './src/manifests/*.json',
+        to: './',
+        flatten: true
+      },
+      {
+        from: './src/_locales/',
+        to: './_locales/'
+      },
       { 
         from : './src/**/*.{jpg,png,gif,svg}',
         to: './',
