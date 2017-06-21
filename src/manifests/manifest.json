@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "あとで読む",
-  "description": "Just store the page link what you want to read later.",
+  "description": "Just store the page link what you want to read later.\nあとで読みたい記事のリンクを保存しておくだけです。",
   "version": "1.0.0",
   "icons": {
     "16": "link_16.png",
