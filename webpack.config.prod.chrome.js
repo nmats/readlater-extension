@@ -20,7 +20,7 @@ export default merge.smart( baseConfig, {
   },
 
   output: {
-    path: path.join( __dirname, 'app/chrome' ),
+    path: path.join( __dirname, 'app/chrome-firefox' ),
   },
 
   module: {

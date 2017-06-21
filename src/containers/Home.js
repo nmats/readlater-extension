@@ -10,6 +10,7 @@ import Lists from './Lists';
 // =======================
 // Import modules.
 // =======================
+import Analytics from '../modules/Analytics';
 import DB from '../modules/Database';
 import Style from '../styles/Style.css';
 import '../assets/css/reset.css';
@@ -23,6 +24,10 @@ export default class Home extends Component {
       searchObj: {},
       database: new DB()
     }
+  }
+
+  componentDidMount() {
+    Analytics( window, document, 'script', 'dataLayer', 'GTM-5PPHSTP' );
   }
 
   render() {

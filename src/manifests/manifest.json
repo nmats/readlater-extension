@@ -23,5 +23,6 @@
       "matches" : ["*://*/*"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com/ https://www.google-analytics.com/; object-src 'self'"
 }
