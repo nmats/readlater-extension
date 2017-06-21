@@ -25,10 +25,12 @@ time, mark, audio, video {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    box-sizing: border-box;
 }
 
 body {
     line-height:1;
+    font-family: 'Arial', sans-serif;
 }
 
 article,aside,details,figcaption,figure,
@@ -56,6 +58,10 @@ a {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+}
+
+a:hover {
+    pointer: cursor;
 }
 
 /* change colours to suit your needs */
@@ -113,4 +119,12 @@ img {
 footer {
   padding: 20px;
   font-size: 12px;
+}
+
+button:hover {
+  pointer: cursor !important;
+}
+
+*:focus {
+    outline: none;
 }

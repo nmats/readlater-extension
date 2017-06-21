@@ -1,60 +1,43 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import SearchForm from './SearchForm';
-import ShopResults from './ShopResults';
+// =======================
+// Import other containers.
+// =======================
+import PageInformation from './PageInformation';
+import Lists from './Lists';
 
-import { sendRequest } from '../modules/helper';
-
+// =======================
+// Import modules.
+// =======================
+import Analytics from '../modules/Analytics';
+import DB from '../modules/Database';
 import Style from '../styles/Style.css';
 import '../assets/css/reset.css';
 
 export default class Home extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.state = {
       shops: null,
-      searchObj: {}
+      searchObj: {},
+      database: new DB()
     }
   }
 
-  onsubmit( event ) {
-    event.preventDefault();
-
-    const formData = {};
-    const elements = event.target.querySelectorAll('input, select');
-    [...elements].forEach( elem => {
-      const name = elem.getAttribute('name');
-      const value = !!elem.value ? elem.value : null;
-
-      if ( !!value && name !== 'submit' && value !== '99' ) {
-        formData[ name ] = value;
-      }
-
-    });
-
-    sendRequest( formData, ( shops, searchObj ) => {
-      this.setState( prev => ({
-        shops: shops,
-        searchObj: searchObj
-      }));
-    });
+  componentDidMount() {
+    Analytics( window, document, 'script', 'dataLayer', 'GTM-5PPHSTP' );
   }
 
   render() {
     return(
       <section 
-        className={ classNames(Style.searchForm) }>
-        <SearchForm onsubmit={ this.onsubmit.bind(this) } />
-        {
-          !!this.state.shops 
-          ? <ShopResults 
-              list={ this.state.shops }
-              searchObj={ this.state.searchObj } /> 
-          : null
-        }
+        className={ classNames( Style.searchForm ) }>
+        <PageInformation db={ this.state.database } />
+        <Lists db={ this.state.database } />
       </section>
     )
   }
+
 }

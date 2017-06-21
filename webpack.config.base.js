@@ -6,7 +6,7 @@ export default {
 
   output: {
     path: path.join( __dirname, 'app' ),
-    filename: 'main.js'
+    filename: '[name].js'
   },
 
   module: {

@@ -1,0 +1,17 @@
+{
+  "extension_name": {
+    "message": "Read Later"
+  },
+  "extension_desc": {
+    "message": "Simply store the page link to read later before you add it to your bookmarks."
+  },
+  "current_page": {
+    "message": "Current Page Title"
+  },
+  "list_name": {
+    "message": "List"
+  },
+  "btn_label": {
+    "message": "Add to list"
+  }
+}

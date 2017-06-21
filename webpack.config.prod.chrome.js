@@ -9,10 +9,18 @@ import baseConfig from './webpack.config.base.js';
 
 export default merge.smart( baseConfig, {
 
-  entry: path.join( __dirname, 'src/index.js' ),
+  entry: {
+    main: [
+      'babel-polyfill',
+      path.join( __dirname, 'src/index.js' )
+    ],
+    content: [
+      path.join( __dirname, 'src/content-script.js' )
+    ]
+  },
 
   output: {
-    path: path.join( __dirname, 'app/chrome' ),
+    path: path.join( __dirname, 'app/chrome-firefox' ),
   },
 
   module: {
@@ -40,13 +48,28 @@ export default merge.smart( baseConfig, {
 
     new webpack.optimize.UglifyJsPlugin(),
 
+    new webpack.optimize.ModuleConcatenationPlugin(),
+
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify( process.env.NODE_ENV || 'production' ),
       'process.env.API_KEY': JSON.stringify( process.env.API_KEY )
     }),
 
     new CopyWebpackPlugin([
-      { from: './src/**/*.{html,json}', to: './', flatten: true },
+      { 
+        from: './src/**/*.html', 
+        to: './', 
+        flatten: true 
+      },
+      {
+        from: './src/manifests/*.json',
+        to: './',
+        flatten: true
+      },
+      {
+        from: './src/_locales/',
+        to: './_locales/'
+      },
       { 
         from : './src/**/*.{jpg,png,gif,svg}',
         to: './',

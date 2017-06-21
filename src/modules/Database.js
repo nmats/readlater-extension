@@ -1,40 +1,46 @@
-import React from 'react';
-import * as RxDB from 'rxdb';
+export default class Database {
 
-import {
-DB_NAME,
-DB_PWD,
-COLLECTION_NAME,
-COLLECTION_SCHEMA } from '../constants';
+  constructor() {
+    this.items = {};
+  }
 
-RxDB.plugin( require('pouchdb-adapter-websql') );
+  setData( data ) {
+    return new Promise( (resolve, reject) => {
+      const newData = {};
+      const now = Date.now();
+      data = {
+        ...data,
+        key: now
+      };
+      newData[ now ] = data;
+      chrome.storage.local.set( newData, err => {
+        if ( err ) return reject({ message: 'Failed to store data' });
+        return resolve({ message: 'Data stored.' });
+      });
+    });
+  }
 
-const RxDB = {};
+  removeData( key ) {
+    return new Promise( (resolve, reject) => {
+      chrome.storage.local.remove( key, err => {
+        if ( err ) return reject({ message: 'Failed to remove data' });
+        return resolve({ message: 'Data removed' });
+      })
+    })
+  }
 
-const createDB = async () => {
-  const db = await RxDB.create({
-    name: DB_NAME,
-    password: DB_PWD,
-    adapter: 'websql',
-    multiInstance: true
-  });
+  getAllData() {
+    return new Promise( (resolve, reject) => {
+      chrome.storage.local.get( null, items => {
+        if ( !items ) return reject({ message: 'No data' });
+        this.items = Object.assign( {}, items );
+        return resolve( this.items );
+      });
+    });
+  }
 
-  return db;
-}
+  removeAllData() {
+    chrome.storage.local.clear();
+  }
 
-const createCollection = async db => {
-  const collection = await db.collection({
-    name: COLLECTION_NAME,
-    schema: COLLECTION_SCHEMA
-  });
-
-  return collection;
-}
-
-RxDB.init = () => {
-  return createDB();
-}
-
-RxDB.collection = () => {
-  return createCollection();
 }

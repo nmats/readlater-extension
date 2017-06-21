@@ -1,0 +1,38 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "webextensions": true
+  },
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "no-extra-boolean-cast": ["off"],
+    "no-console": ["error", {"allow": ["error"]}],
+    "no-irregular-whitespace": ["error"],
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+    "space-before-function-paren": ["error", "never"],
+    "arrow-parens": ["error", "as-needed"],
+    "semi-spacing": ["error", { "before": false, "after": true }],
+    "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "quote-props": ["error", "as-needed"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "indent": ["error", 2, {
+      "SwitchCase": 2,
+      "MemberExpression": 0
+    }],
+    "no-unused-vars": ["error"],
+    "react/jsx-uses-react": ["error"],
+    "react/jsx-uses-vars": ["error"]
+  },
+  "plugins": [
+    "react"
+  ]
+}

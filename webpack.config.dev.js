@@ -8,12 +8,15 @@ const publicPath = `http://localhost:${port}`;
 
 export default merge.smart( baseConfig, {
 
-  entry: [
-    'react-hot-loader/patch',
-    `webpack-dev-server/client?http://localhost:${port}/`,
-    `webpack/hot/only-dev-server`,
-    path.join( __dirname, 'src/index.js' )
-  ],
+  entry: {
+    main: [
+      'babel-polyfill',
+      'react-hot-loader/patch',
+      `webpack-dev-server/client?http://localhost:${port}/`,
+      `webpack/hot/only-dev-server`,
+      path.join( __dirname, 'src/index.js' )
+    ]
+  },
 
   output: {
     publicPath: `http://localhost:${port}/`
