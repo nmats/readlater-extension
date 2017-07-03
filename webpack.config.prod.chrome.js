@@ -51,8 +51,7 @@ export default merge.smart( baseConfig, {
     new webpack.optimize.ModuleConcatenationPlugin(),
 
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify( process.env.NODE_ENV || 'production' ),
-      'process.env.API_KEY': JSON.stringify( process.env.API_KEY )
+      'process.env.NODE_ENV': JSON.stringify( process.env.NODE_ENV || 'production' )
     }),
 
     new CopyWebpackPlugin([
